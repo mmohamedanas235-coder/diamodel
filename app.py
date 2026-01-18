@@ -12,6 +12,9 @@ scaler = joblib.load('scaler.joblib')
 # Load the Logistic Regression model
 model = joblib.load('logistic_regression_model.joblib')
 
+@app.route("/", methods=["GET"])
+def home():
+    return "Diabetes Prediction API is running successfully."
 
 print("StandardScaler and Logistic Regression model loaded successfully.")
 # Define a route for making predictions
