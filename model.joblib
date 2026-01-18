@@ -1,6 +1,0 @@
-import joblib
-
-# Save the scaler object to a file
-joblib.dump(scaler, 'scaler.joblib')
-
-print("StandardScaler object successfully exported as 'scaler.joblib'")
