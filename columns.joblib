@@ -1,4 +1,0 @@
-import joblib
-
-# X_train must be your training dataframe BEFORE converting to numpy
-joblib.dump(list(X_train.columns), "columns.joblib")
