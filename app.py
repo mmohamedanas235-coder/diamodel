@@ -5,9 +5,11 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
+# Load the StandardScaler object
 scaler = joblib.load('scaler.joblib')
-model = joblib.load('model.joblib')
-expected_columns = joblib.load('columns.joblib')
+
+# Load the Logistic Regression model
+model = joblib.load('logistic_regression_model.joblib')
 
 
 print("StandardScaler and Logistic Regression model loaded successfully.")
