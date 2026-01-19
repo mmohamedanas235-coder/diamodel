@@ -3,8 +3,11 @@ import pandas as pd
 import os
 import joblib
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
+
 
 # Load the StandardScaler object
 scaler = joblib.load('scaler.joblib')
