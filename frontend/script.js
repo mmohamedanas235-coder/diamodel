@@ -1,5 +1,5 @@
 document.getElementById("predictForm").addEventListener("submit", async function(e) {
-    e.preventDefault();  // stop page reload
+    e.preventDefault(); // stop page reload
 
     const data = {
         Pregnancies: document.getElementById("Pregnancies").value,
@@ -23,16 +23,31 @@ document.getElementById("predictForm").addEventListener("submit", async function
             body: JSON.stringify(data)
         });
 
-        const result = await res.json();
-        console.log("Received:", result);
+        // Log the raw response first
+        const text = await res.text();
+        console.log("Raw response:", text);
 
+        // Try parsing JSON
+        let result;
+        try {
+            result = JSON.parse(text);
+        } catch (parseError) {
+            console.error("Failed to parse JSON:", parseError);
+            document.getElementById("result").innerHTML = "Invalid response from API";
+            return;
+        }
+
+        console.log("Parsed result:", result);
+
+        // Display result
         document.getElementById("result").innerHTML =
             result.prediction === 1
             ? `⚠ High Risk of Diabetes (${(result.probability_diabetes * 100).toFixed(2)}%)`
             : `✅ Low Risk of Diabetes (${(result.probability_no_diabetes * 100).toFixed(2)}%)`;
 
     } catch (error) {
+        // Show detailed error in the console
         document.getElementById("result").innerHTML = "Error connecting to model API";
-        console.error(error);
+        console.error("Fetch error:", error);
     }
 });
