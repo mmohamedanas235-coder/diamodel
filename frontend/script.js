@@ -1,16 +1,17 @@
 document.getElementById("predictForm").addEventListener("submit", async function(e) {
     e.preventDefault(); // stop page reload
 
-    const data = {
-        Pregnancies: document.getElementById("Pregnancies").value,
-        Glucose: document.getElementById("Glucose").value,
-        BloodPressure: document.getElementById("BloodPressure").value,
-        SkinThickness: document.getElementById("SkinThickness").value,
-        Insulin: document.getElementById("Insulin").value,
-        BMI: document.getElementById("BMI").value,
-        DiabetesPedigreeFunction: document.getElementById("DiabetesPedigreeFunction").value,
-        Age: document.getElementById("Age").value
-    };
+  const data = {
+    // Wrap each value in Number() to ensure the API gets decimals/integers
+    Pregnancies: Number(document.getElementById("Pregnancies").value),
+    Glucose: Number(document.getElementById("Glucose").value),
+    BloodPressure: Number(document.getElementById("BloodPressure").value),
+    SkinThickness: Number(document.getElementById("SkinThickness").value),
+    Insulin: Number(document.getElementById("Insulin").value),
+    BMI: Number(document.getElementById("BMI").value),
+    DiabetesPedigreeFunction: Number(document.getElementById("DiabetesPedigreeFunction").value),
+    Age: Number(document.getElementById("Age").value)
+};
 
     console.log("Sending:", data);
 
