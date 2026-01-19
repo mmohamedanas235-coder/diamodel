@@ -1,1 +1,30 @@
-<h1>Frontend folder created</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Diabetes Predictor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Diabetes Risk Predictor</h1>
+
+    <form id="predictForm">
+        <input type="number" step="any" placeholder="Pregnancies" id="Pregnancies" required>
+        <input type="number" step="any" placeholder="Glucose" id="Glucose" required>
+        <input type="number" step="any" placeholder="Blood Pressure" id="BloodPressure" required>
+        <input type="number" step="any" placeholder="Skin Thickness" id="SkinThickness" required>
+        <input type="number" step="any" placeholder="Insulin" id="Insulin" required>
+        <input type="number" step="any" placeholder="BMI" id="BMI" required>
+        <input type="number" step="any" placeholder="Diabetes Pedigree Function" id="DiabetesPedigreeFunction" required>
+        <input type="number" step="any" placeholder="Age" id="Age" required>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    <div id="result"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
