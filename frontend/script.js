@@ -1,26 +1,32 @@
-document.getElementById("predictForm").addEventListener("submit", async function(e) {
-    e.preventDefault();
+async function predict() {
+    const values = document.querySelectorAll("input");
 
     const data = {
-        Pregnancies: parseFloat(document.getElementById("Pregnancies").value),
-        Glucose: parseFloat(document.getElementById("Glucose").value),
-        BloodPressure: parseFloat(document.getElementById("BloodPressure").value),
-        SkinThickness: parseFloat(document.getElementById("SkinThickness").value),
-        Insulin: parseFloat(document.getElementById("Insulin").value),
-        BMI: parseFloat(document.getElementById("BMI").value),
-        DiabetesPedigreeFunction: parseFloat(document.getElementById("DiabetesPedigreeFunction").value),
-        Age: parseFloat(document.getElementById("Age").value)
+        Pregnancies: values[0].value,
+        Glucose: values[1].value,
+        BloodPressure: values[2].value,
+        SkinThickness: values[3].value,
+        Insulin: values[4].value,
+        BMI: values[5].value,
+        DiabetesPedigreeFunction: values[6].value,
+        Age: values[7].value
     };
 
-    const response = await fetch("https://diamodel.onrender.com/predict", {
+    console.log("Sending:", data);
+
+    const res = await fetch("https://diamodel.onrender.com/predict", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify(data)
     });
 
-    const result = await response.json();
+    const result = await res.json();
+    console.log("Received:", result);
 
-    document.getElementById("result").innerHTML =
-        `Prediction: ${result.prediction === 1 ? "Diabetic" : "Not Diabetic"}<br>
-         Probability: ${(result.probability_diabetes * 100).toFixed(2)}%`;
-});
+    document.getElementById("output").innerHTML =
+        result.prediction === 1
+            ? `⚠ High Risk (${(result.probability_diabetes*100).toFixed(2)}%)`
+            : `✅ Low Risk (${(result.probability_no_diabetes*100).toFixed(2)}%)`;
+}
